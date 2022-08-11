@@ -7,6 +7,7 @@ const squareTwo = document.getElementById('colourTwoSquare');
 const mixBtn = document.getElementById('mix');
 
 const squareResult = document.getElementById('resultSquare');
+const rgbResult = document.getElementById('rgbResult');
 
 function decimalRound(num, places) {
   return Math.round(num * 10 ** places) / 10 ** places;
@@ -102,4 +103,5 @@ mixBtn.addEventListener('click', () => {
   const colourMixRgb = cmykToRgb(colourMixCmyk);
 
   squareResult.style.backgroundColor = `rgb(${colourMixRgb.r},${colourMixRgb.g},${colourMixRgb.b})`;
+  rgbResult.innerText = `rgb(${colourMixRgb.r},${colourMixRgb.g},${colourMixRgb.b})`;
 });
