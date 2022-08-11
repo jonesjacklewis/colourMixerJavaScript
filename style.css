@@ -1,0 +1,17 @@
+.column{
+    float: left;
+    width: 20%;
+}
+
+.container:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.square{
+    height: 50px;
+    width: 50px;
+    margin-top: 5%;
+    border: 1px solid black;
+}
