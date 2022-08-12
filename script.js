@@ -143,7 +143,7 @@ function updateColorOne() {
   });
 
   squareOne.style.backgroundColor = hexInputOne;
-  rgbColorOne.innerText = `rgb(${rgbInputOne.r},${rgbInputOne.g},${rgbInputOne.b})`;
+  rgbColorOne.innerText = `Colour Value = rgb(${rgbInputOne.r},${rgbInputOne.g},${rgbInputOne.b})`;
 }
 
 function updateColorTwo() {
@@ -170,7 +170,7 @@ function updateColorTwo() {
   });
 
   squareTwo.style.backgroundColor = hexInputTwo;
-  rgbColorTwo.innerText = `rgb(${rgbInputTwo.r},${rgbInputTwo.g},${rgbInputTwo.b})`;
+  rgbColorTwo.innerText = `Colour Value = rgb(${rgbInputTwo.r},${rgbInputTwo.g},${rgbInputTwo.b})`;
 }
 
 colourInputOne.addEventListener('input', () => {
@@ -211,7 +211,7 @@ mixBtn.addEventListener('click', () => {
   });
 
   squareResult.style.backgroundColor = `rgb(${colourMixRgb.r},${colourMixRgb.g},${colourMixRgb.b})`;
-  rgbResult.innerText = `rgb(${colourMixRgb.r},${colourMixRgb.g},${colourMixRgb.b})`;
+  rgbResult.innerText = `Colour Value = rgb(${colourMixRgb.r},${colourMixRgb.g},${colourMixRgb.b})`;
 });
 
 document.addEventListener('DOMContentLoaded', () => {
