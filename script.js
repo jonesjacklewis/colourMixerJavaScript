@@ -1,8 +1,10 @@
 const colourInputOne = document.getElementById('colorOne');
 const squareOne = document.getElementById('colourOneSquare');
+const rgbColorOne = document.getElementById('rgbColorOne');
 
 const colourInputTwo = document.getElementById('colorTwo');
 const squareTwo = document.getElementById('colourTwoSquare');
+const rgbColorTwo = document.getElementById('rgbColorTwo');
 
 const mixBtn = document.getElementById('mix');
 
@@ -13,14 +15,24 @@ function decimalRound(num, places) {
   return Math.round(num * 10 ** places) / 10 ** places;
 }
 
-function hexToCmyk(hex) {
+function hexToRgb(hex) {
   const hexWithoutHash = hex.replace('#', '');
 
   const r = parseInt(hexWithoutHash.substring(0, 2), 16);
   const g = parseInt(hexWithoutHash.substring(2, 4), 16);
   const b = parseInt(hexWithoutHash.substring(4, 6), 16);
 
+  return {
+    r,
+    g,
+    b,
+  };
+}
+
+function hexToCmyk(hex) {
   // RGB to CMYK: https://www.rapidtables.com/convert/color/rgb-to-cmyk.html
+
+  const { r, g, b } = hexToRgb(hex);
 
   const rDash = decimalRound(r / 255, 2);
   const gDash = decimalRound(g / 255, 2);
@@ -82,14 +94,19 @@ function cmykToRgb(cmyk) {
 
 colourInputOne.addEventListener('input', () => {
   const hexInputOne = colourInputOne.value;
+  const rgbInputOne = hexToRgb(hexInputOne);
 
   squareOne.style.backgroundColor = hexInputOne;
+  rgbColorOne.innerText = `rgb(${rgbInputOne.r},${rgbInputOne.g},${rgbInputOne.b})`;
 });
 
 colourInputTwo.addEventListener('input', () => {
   const hexInputTwo = colourInputTwo.value;
+  const rgbInputTwo = hexToRgb(hexInputTwo);
 
   squareTwo.style.backgroundColor = hexInputTwo;
+  rgbColorTwo.innerText = `rgb(${rgbInputTwo.r},${rgbInputTwo.g},${rgbInputTwo.b})`;
+
 });
 
 mixBtn.addEventListener('click', () => {
