@@ -132,9 +132,9 @@ function updateColorOne() {
       const closestHex = name.closest_named_hex;
       const closestRgb = hexToRgb(closestHex);
 
-      colorOneName.innerText = value;
-      colorOneExactMatch.innerText = exactMatch ? 'Yes' : 'No';
-      colorOneClosestMatch.innerText = `rgb(${closestRgb.r},${closestRgb.g},${closestRgb.b})`;
+      colorOneName.innerText = `Name: ${value}`;
+      colorOneExactMatch.innerText = exactMatch ? 'Exact Match?: Yes' : 'Exact Match?: No';
+      colorOneClosestMatch.innerText = `Closest Match: rgb(${closestRgb.r},${closestRgb.g},${closestRgb.b})`;
     }).catch((error) => {
       console.error(error);
     });
@@ -159,9 +159,9 @@ function updateColorTwo() {
       const closestHex = name.closest_named_hex;
       const closestRgb = hexToRgb(closestHex);
 
-      colorTwoName.innerText = value;
-      colorTwoExactMatch.innerText = exactMatch ? 'Yes' : 'No';
-      colorTwoClosestMatch.innerText = `rgb(${closestRgb.r},${closestRgb.g},${closestRgb.b})`;
+      colorTwoName.innerText = `Name: ${value}`;
+      colorTwoExactMatch.innerText = exactMatch ? 'Exact Match: Yes' : 'Exact Match: No';
+      colorTwoClosestMatch.innerText = `Closest Match: rgb(${closestRgb.r},${closestRgb.g},${closestRgb.b})`;
     }).catch((error) => {
       console.error(error);
     });
@@ -200,9 +200,9 @@ mixBtn.addEventListener('click', () => {
       const closestHex = name.closest_named_hex;
       const closestRgb = hexToRgb(closestHex);
 
-      colorMixName.innerText = value;
-      colorMixExactMatch.innerText = exactMatch ? 'Yes' : 'No';
-      colorMixClosestMatch.innerText = `rgb(${closestRgb.r},${closestRgb.g},${closestRgb.b})`;
+      colorMixName.innerText = `Name: ${value}`;
+      colorMixExactMatch.innerText = exactMatch ? 'Exact Match: Yes' : 'Exact Match: No';
+      colorMixClosestMatch.innerText = `Closest Match: rgb(${closestRgb.r},${closestRgb.g},${closestRgb.b})`;
     }).catch((error) => {
       console.error(error);
     });
