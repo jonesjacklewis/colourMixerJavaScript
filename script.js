@@ -1,15 +1,28 @@
+/* eslint-disable no-bitwise */
+/* eslint-disable no-console */
 const colourInputOne = document.getElementById('colorOne');
 const squareOne = document.getElementById('colourOneSquare');
 const rgbColorOne = document.getElementById('rgbColorOne');
+const colorOneName = document.getElementById('colorOneName');
+const colorOneExactMatch = document.getElementById('colorOneExactMatch');
+const colorOneClosestMatch = document.getElementById('colorOneClosestMatch');
 
 const colourInputTwo = document.getElementById('colorTwo');
 const squareTwo = document.getElementById('colourTwoSquare');
 const rgbColorTwo = document.getElementById('rgbColorTwo');
+const colorTwoName = document.getElementById('colorTwoName');
+const colorTwoExactMatch = document.getElementById('colorTwoExactMatch');
+const colorTwoClosestMatch = document.getElementById('colorTwoClosestMatch');
 
 const mixBtn = document.getElementById('mix');
 
 const squareResult = document.getElementById('resultSquare');
 const rgbResult = document.getElementById('rgbResult');
+const colorMixName = document.getElementById('colorMixName');
+const colorMixExactMatch = document.getElementById('colorMixExactMatch');
+const colorMixClosestMatch = document.getElementById('colorMixClosestMatch');
+
+const api = 'https://www.thecolorapi.com/id?hex=';
 
 function decimalRound(num, places) {
   return Math.round(num * 10 ** places) / 10 ** places;
@@ -92,9 +105,34 @@ function cmykToRgb(cmyk) {
   };
 }
 
+function rgbToHex(r, g, b) {
+  // Completely generated using GitHub CoPilot - from function name
+  const hex = ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  return `#${hex}`;
+}
+
 function updateColorOne() {
   const hexInputOne = colourInputOne.value;
   const rgbInputOne = hexToRgb(hexInputOne);
+
+  fetch(`${api}${hexInputOne.replace('#', '')}`).then((response) => {
+    response.json().then((body) => {
+      const { name } = body;
+
+      const { value } = name;
+      const exactMatch = name.exact_match_name;
+      const closestHex = name.closest_named_hex;
+      const closestRgb = hexToRgb(closestHex);
+
+      colorOneName.innerText = value;
+      colorOneExactMatch.innerText = exactMatch ? 'Yes' : 'No';
+      colorOneClosestMatch.innerText = `rgb(${closestRgb.r},${closestRgb.g},${closestRgb.b})`;
+    }).catch((error) => {
+      console.error(error);
+    });
+  }).catch((err) => {
+    console.error(err);
+  });
 
   squareOne.style.backgroundColor = hexInputOne;
   rgbColorOne.innerText = `rgb(${rgbInputOne.r},${rgbInputOne.g},${rgbInputOne.b})`;
@@ -103,6 +141,25 @@ function updateColorOne() {
 function updateColorTwo() {
   const hexInputTwo = colourInputTwo.value;
   const rgbInputTwo = hexToRgb(hexInputTwo);
+
+  fetch(`${api}${hexInputTwo.replace('#', '')}`).then((response) => {
+    response.json().then((body) => {
+      const { name } = body;
+
+      const { value } = name;
+      const exactMatch = name.exact_match_name;
+      const closestHex = name.closest_named_hex;
+      const closestRgb = hexToRgb(closestHex);
+
+      colorTwoName.innerText = value;
+      colorTwoExactMatch.innerText = exactMatch ? 'Yes' : 'No';
+      colorTwoClosestMatch.innerText = `rgb(${closestRgb.r},${closestRgb.g},${closestRgb.b})`;
+    }).catch((error) => {
+      console.error(error);
+    });
+  }).catch((err) => {
+    console.error(err);
+  });
 
   squareTwo.style.backgroundColor = hexInputTwo;
   rgbColorTwo.innerText = `rgb(${rgbInputTwo.r},${rgbInputTwo.g},${rgbInputTwo.b})`;
@@ -125,6 +182,25 @@ mixBtn.addEventListener('click', () => {
 
   const colourMixCmyk = mixCmyk(cmykInputOne, cmykInputTwo);
   const colourMixRgb = cmykToRgb(colourMixCmyk);
+
+  fetch(`${api}${rgbToHex(colourMixRgb.r, colourMixRgb.g, colourMixRgb.b).replace('#', '')}`).then((response) => {
+    response.json().then((body) => {
+      const { name } = body;
+
+      const { value } = name;
+      const exactMatch = name.exact_match_name;
+      const closestHex = name.closest_named_hex;
+      const closestRgb = hexToRgb(closestHex);
+
+      colorMixName.innerText = value;
+      colorMixExactMatch.innerText = exactMatch ? 'Yes' : 'No';
+      colorMixClosestMatch.innerText = `rgb(${closestRgb.r},${closestRgb.g},${closestRgb.b})`;
+    }).catch((error) => {
+      console.error(error);
+    });
+  }).catch((err) => {
+    console.error(err);
+  });
 
   squareResult.style.backgroundColor = `rgb(${colourMixRgb.r},${colourMixRgb.g},${colourMixRgb.b})`;
   rgbResult.innerText = `rgb(${colourMixRgb.r},${colourMixRgb.g},${colourMixRgb.b})`;
