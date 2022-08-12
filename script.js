@@ -24,6 +24,14 @@ const colorMixClosestMatch = document.getElementById('colorMixClosestMatch');
 
 const api = 'https://www.thecolorapi.com/id?hex=';
 
+squareOne.addEventListener('click', () => {
+  colourInputOne.click();
+});
+
+squareTwo.addEventListener('click', () => {
+  colourInputTwo.click();
+});
+
 function decimalRound(num, places) {
   return Math.round(num * 10 ** places) / 10 ** places;
 }
