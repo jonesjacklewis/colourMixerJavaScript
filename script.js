@@ -133,7 +133,7 @@ function updateColorOne() {
       const closestRgb = hexToRgb(closestHex);
 
       colorOneName.innerText = `Name: ${value}`;
-      colorOneExactMatch.innerText = exactMatch ? 'Exact Match?: Yes' : 'Exact Match?: No';
+      colorOneExactMatch.innerText = exactMatch ? 'Exact Match: Yes' : 'Exact Match: No';
       colorOneClosestMatch.innerText = `Closest Match: rgb(${closestRgb.r},${closestRgb.g},${closestRgb.b})`;
     }).catch((error) => {
       console.error(error);
